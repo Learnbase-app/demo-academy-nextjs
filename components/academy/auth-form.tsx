@@ -25,48 +25,50 @@ export function AuthForm({ action, mode, nextPath }: AuthFormProps) {
   const [state, formAction, pending] = useActionState(action, initialState)
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} className="space-y-4">
       <input type="hidden" name="next" value={nextPath} />
 
       {mode === "signup" ? (
-        <label className="block space-y-2">
-          <span className="section-kicker block">Full name</span>
+        <label className="block space-y-1.5">
+          <span className="text-sm font-medium text-foreground">
+            Full name
+          </span>
           <Input
             name="name"
             required
-            className="h-14 rounded-[1.45rem] px-5"
+            className="h-11"
             placeholder="Jane Founder"
           />
         </label>
       ) : null}
 
-      <label className="block space-y-2">
-        <span className="section-kicker block">Email</span>
+      <label className="block space-y-1.5">
+        <span className="text-sm font-medium text-foreground">Email</span>
         <Input
           name="email"
           type="email"
           autoComplete="email"
           required
-          className="h-14 rounded-[1.45rem] px-5"
+          className="h-11"
           placeholder="you@example.com"
         />
       </label>
 
-      <label className="block space-y-2">
-        <span className="section-kicker block">Password</span>
+      <label className="block space-y-1.5">
+        <span className="text-sm font-medium text-foreground">Password</span>
         <Input
           name="password"
           type="password"
           autoComplete={mode === "login" ? "current-password" : "new-password"}
           required
           minLength={8}
-          className="h-14 rounded-[1.45rem] px-5"
+          className="h-11"
           placeholder="Minimum 8 characters"
         />
       </label>
 
       {state.error ? (
-        <div className="rounded-[1.35rem] border border-destructive/25 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+        <div className="rounded-lg border border-destructive/20 bg-destructive/10 px-3 py-2.5 text-sm text-destructive">
           {state.error}
         </div>
       ) : null}
@@ -75,12 +77,12 @@ export function AuthForm({ action, mode, nextPath }: AuthFormProps) {
         type="submit"
         size="lg"
         disabled={pending}
-        className="h-14 w-full justify-between rounded-[1.45rem] px-5 text-sm"
+        className="mt-2 h-11 w-full"
       >
         {pending
           ? mode === "login"
             ? "Signing in..."
-            : "Creating your account..."
+            : "Creating account..."
           : mode === "login"
             ? "Log in"
             : "Create account"}

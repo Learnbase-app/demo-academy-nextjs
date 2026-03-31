@@ -1,77 +1,97 @@
 "use client"
 
 import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { Check, Copy } from "@phosphor-icons/react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 
 export function DemoCredentials() {
-  const [copied, setCopied] = useState(false)
+  const [copiedField, setCopiedField] = useState<string | null>(null)
 
   const email = "demo@launchcraft.academy"
   const password = "Launchcraft123!"
 
-  const handleCopy = async () => {
+  const handleCopy = async (value: string, field: string) => {
     try {
-      await navigator.clipboard.writeText(
-        `Email: ${email}\nPassword: ${password}`
-      )
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      await navigator.clipboard.writeText(value)
+      setCopiedField(field)
+      setTimeout(() => setCopiedField(null), 2000)
     } catch (err) {
       console.error("Failed to copy", err)
     }
   }
 
   return (
-    <Card className="atelier-panel relative mt-8 overflow-hidden py-0">
-      {/* Subtle background glow to make it stand out beautifully but not extravagantly */}
-      <div className="absolute -top-8 -right-8 size-32 rounded-full bg-foreground/5 blur-3xl" />
+    <div className="rounded-xl border border-border/50 bg-secondary/30 p-4">
+      <p className="mb-3 text-xs font-medium tracking-wide text-muted-foreground uppercase">
+        Demo credentials
+      </p>
+      <div className="space-y-2">
+        <CopyRow
+          label="Email"
+          value={email}
+          copied={copiedField === "email"}
+          onCopy={() => handleCopy(email, "email")}
+        />
+        <CopyRow
+          label="Password"
+          value={password}
+          copied={copiedField === "password"}
+          onCopy={() => handleCopy(password, "password")}
+        />
+      </div>
+    </div>
+  )
+}
 
-      <CardHeader className="border-b border-border/55 py-5 sm:py-6">
-        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-          <div className="space-y-1.5">
-            <div className="section-kicker">Demo student account</div>
-            <CardTitle className="text-2xl sm:text-3xl">
-              Quick access demo credentials
-            </CardTitle>
-          </div>
-          <Button
-            onClick={handleCopy}
-            variant="secondary"
-            size="sm"
-            className="h-10 w-full shrink-0 rounded-full transition-all active:scale-95 sm:w-auto"
-          >
-            {copied ? (
-              <span className="flex items-center gap-2">
-                <Check className="size-4 text-green-500" /> Copied!
-              </span>
-            ) : (
-              <span className="flex items-center gap-2">
-                <Copy className="size-4" /> Copy details
-              </span>
-            )}
-          </Button>
-        </div>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-6 py-5 text-sm leading-7 text-muted-foreground sm:flex-row sm:py-6">
-        <div className="flex-1 space-y-1">
-          <span className="block text-xs tracking-wider text-muted-foreground/70 uppercase">
-            Email
-          </span>
-          <code className="rounded-md border border-border/50 bg-background px-2 py-1 text-[13px] font-medium text-foreground">
-            {email}
-          </code>
-        </div>
-        <div className="flex-1 space-y-1">
-          <span className="block text-xs tracking-wider text-muted-foreground/70 uppercase">
-            Password
-          </span>
-          <code className="rounded-md border border-border/50 bg-background px-2 py-1 text-[13px] font-medium text-foreground">
-            {password}
-          </code>
-        </div>
-      </CardContent>
-    </Card>
+function CopyRow({
+  label,
+  value,
+  copied,
+  onCopy,
+}: {
+  label: string
+  value: string
+  copied: boolean
+  onCopy: () => void
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="w-16 shrink-0 text-xs text-muted-foreground">
+        {label}
+      </span>
+      <code className="flex-1 truncate font-mono text-sm text-foreground">
+        {value}
+      </code>
+      <button
+        onClick={onCopy}
+        type="button"
+        className="flex size-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground active:scale-95"
+        aria-label={`Copy ${label}`}
+      >
+        <AnimatePresence mode="wait" initial={false}>
+          {copied ? (
+            <motion.div
+              key="check"
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              transition={{ duration: 0.12 }}
+            >
+              <Check className="size-3.5 text-green-600 dark:text-green-400" weight="bold" />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="copy"
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              transition={{ duration: 0.12 }}
+            >
+              <Copy className="size-3.5" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </button>
+    </div>
   )
 }

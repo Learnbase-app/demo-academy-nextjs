@@ -5,7 +5,6 @@ import { completeItemAction, submitQuizAction } from "@/app/actions"
 import { AccountHeader } from "@/components/academy/account-header"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import {
   getCourseBySlug,
@@ -32,7 +31,7 @@ function QuizForm({
   redirectPath: string
 }) {
   return (
-    <form action={submitQuizAction} className="space-y-8">
+    <form action={submitQuizAction} className="space-y-6">
       <input type="hidden" name="quizId" value={quiz.id} />
       <input type="hidden" name="moduleItemId" value={moduleItemId} />
       <input type="hidden" name="redirectPath" value={redirectPath} />
@@ -40,13 +39,13 @@ function QuizForm({
       {quiz.questions.map((question) => (
         <fieldset
           key={question.id}
-          className="space-y-4 rounded-[1.75rem] border border-border/70 bg-background/72 p-6"
+          className="space-y-3 rounded-xl border border-border/50 p-5"
         >
-          <legend className="text-lg font-semibold tracking-tight">
+          <legend className="text-base font-semibold tracking-tight">
             {question.questionText}
           </legend>
 
-          <div className="space-y-3 text-sm text-foreground/90">
+          <div className="space-y-2 text-sm">
             {question.options.map((option) => {
               const inputType =
                 question.type === "multiple_select" ? "checkbox" : "radio"
@@ -54,13 +53,13 @@ function QuizForm({
               return (
                 <label
                   key={option.id}
-                  className="flex cursor-pointer items-start gap-3 rounded-[1.25rem] border border-border/60 bg-background/80 px-4 py-4 transition hover:border-primary/35"
+                  className="flex cursor-pointer items-start gap-3 rounded-lg border border-border/40 px-4 py-3 transition hover:border-primary/30"
                 >
                   <input
                     type={inputType}
                     name={`question:${question.id}`}
                     value={option.id}
-                    className="mt-1 accent-[var(--primary)]"
+                    className="mt-0.5 accent-[var(--primary)]"
                   />
                   <span>{option.optionText}</span>
                 </label>
@@ -70,7 +69,7 @@ function QuizForm({
         </fieldset>
       ))}
 
-      <Button type="submit" size="lg" className="h-12 rounded-2xl px-6">
+      <Button type="submit" size="lg">
         Submit quiz
       </Button>
     </form>
@@ -114,57 +113,56 @@ export default async function LearnPage({
     <div className="min-h-svh bg-background">
       <AccountHeader student={student} />
 
-      <main className="mx-auto flex flex-col-reverse gap-8 px-4 py-8 sm:px-6 sm:py-10 lg:grid lg:max-w-7xl lg:grid-cols-[20rem_1fr]">
-        <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-          <Card className="atelier-panel py-0">
-            <CardHeader className="border-b border-border/55 py-6">
-              <div className="section-kicker">Course progress</div>
-              <CardTitle className="text-3xl">
-                {learnCourse.course.title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="py-6">
+      <main className="mx-auto flex flex-col-reverse gap-8 px-5 py-10 sm:px-8 lg:grid lg:max-w-7xl lg:grid-cols-[18rem_1fr]">
+        {/* Sidebar */}
+        <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
+          <div className="rounded-xl border border-border/50 bg-card p-4">
+            <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+              Progress
+            </p>
+            <h2 className="font-heading mt-2 text-base font-semibold tracking-tight">
+              {learnCourse.course.title}
+            </h2>
+            <div className="mt-3">
               <Progress value={Math.max(learnCourse.enrollment.progress, 4)}>
                 <div className="flex w-full items-center justify-between text-sm">
-                  <span className="font-medium text-foreground">
-                    Completion
-                  </span>
+                  <span className="font-medium">Completion</span>
                   <span className="text-muted-foreground">
                     {learnCourse.enrollment.progress}%
                   </span>
                 </div>
               </Progress>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
-          <div className="space-y-2.5">
+          <div className="space-y-2">
             {learnCourse.modules.map((module, moduleIndex) => (
               <div
                 key={module.id}
-                className="rounded-[1.7rem] border border-border/70 bg-background/70 p-4 shadow-sm shadow-black/5"
+                className="rounded-xl border border-border/50 p-4"
               >
-                <div className="section-kicker">Module {moduleIndex + 1}</div>
-                <h2 className="mt-2 text-sm font-semibold tracking-tight">
+                <p className="text-xs text-muted-foreground">
+                  Module {moduleIndex + 1}
+                </p>
+                <h3 className="mt-1 text-sm font-semibold tracking-tight">
                   {module.title}
-                </h2>
-                <div className="mt-4 space-y-2">
+                </h3>
+                <div className="mt-3 space-y-1">
                   {module.items.map((moduleItem) => (
                     <Link
                       key={moduleItem.id}
                       href={`/learn/${courseSlug}?item=${moduleItem.id}`}
-                      className={`block rounded-[1.2rem] px-3 py-3 text-sm transition ${
+                      className={`block rounded-lg px-3 py-2.5 text-sm transition ${
                         moduleItem.id === activeItem.id
-                          ? "border border-primary/25 bg-primary/8 text-foreground"
-                          : "border border-transparent text-muted-foreground hover:border-border/55 hover:bg-background/45 hover:text-foreground"
+                          ? "border border-primary/20 bg-primary/5 text-foreground"
+                          : "text-muted-foreground hover:bg-secondary/40 hover:text-foreground"
                       }`}
                     >
-                      <div className="font-medium text-foreground">
-                        {moduleItem.title}
-                      </div>
-                      <div className="mt-1 text-xs tracking-[0.18em] text-muted-foreground uppercase">
+                      <span className="font-medium">{moduleItem.title}</span>
+                      <p className="mt-0.5 text-xs text-muted-foreground">
                         {moduleItem.contentType} ·{" "}
                         {moduleItem.status.replaceAll("_", " ")}
-                      </div>
+                      </p>
                     </Link>
                   ))}
                 </div>
@@ -173,50 +171,47 @@ export default async function LearnPage({
           </div>
         </aside>
 
-        <Card className="atelier-panel py-0">
-          <CardHeader className="border-b border-border/55 py-8">
-            <div className="flex flex-wrap items-start justify-between gap-4">
-              <div className="max-w-3xl">
-                <div className="flex flex-wrap gap-2">
-                  <Badge
-                    variant="outline"
-                    className="text-[0.64rem] tracking-[0.18em] uppercase"
-                  >
+        {/* Main content */}
+        <div className="rounded-xl border border-border/50 bg-card">
+          <div className="border-b border-border/40 p-5 sm:p-6">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <div className="flex flex-wrap gap-1.5">
+                  <Badge variant="outline" className="text-xs">
                     {activeItem.contentType}
                   </Badge>
-                  <Badge
-                    variant="secondary"
-                    className="text-[0.64rem] tracking-[0.18em] uppercase"
-                  >
+                  <Badge variant="secondary" className="text-xs">
                     {activeItem.status.replaceAll("_", " ")}
                   </Badge>
                 </div>
-                <CardTitle className="mt-4 text-4xl">
+                <h1 className="font-heading mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
                   {activeItem.title}
-                </CardTitle>
-                <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                </h1>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {activeItem.module.description}
                 </p>
               </div>
-
-              <Button variant="outline" render={<Link href="/account" />}>
-                Back to dashboard
+              <Button
+                variant="outline"
+                size="sm"
+                render={<Link href="/account" />}
+              >
+                Dashboard
               </Button>
             </div>
-          </CardHeader>
+          </div>
 
-          <CardContent className="py-8">
+          <div className="p-5 sm:p-6">
             {quizScore ? (
-              <div className="rounded-[1.35rem] border border-primary/20 bg-primary/10 px-5 py-4 text-sm text-foreground">
+              <div className="rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-sm">
                 Quiz submitted successfully. Latest score:{" "}
                 <strong>{quizScore}%</strong>
               </div>
             ) : null}
 
             {isEmbeddableContent ? (
-              <div className="mt-8 space-y-8">
-                <div className="group relative overflow-hidden rounded-[1.5rem] border-0 bg-black shadow-2xl ring-1 ring-white/10 sm:rounded-[2rem]">
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="space-y-6">
+                <div className="overflow-hidden rounded-lg bg-black">
                   {activeContent.embedUrl ? (
                     <iframe
                       src={activeContent.embedUrl}
@@ -232,11 +227,9 @@ export default async function LearnPage({
                   )}
                 </div>
 
-                <div className="rounded-[1.7rem] border border-border/60 bg-background/72 p-6 shadow-sm shadow-black/5">
-                  <h3 className="text-lg font-semibold tracking-tight">
-                    Lesson summary
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                <div className="rounded-lg border border-border/40 bg-secondary/20 p-4">
+                  <h3 className="text-sm font-semibold">Lesson summary</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {activeContent.description}
                   </p>
                 </div>
@@ -258,16 +251,12 @@ export default async function LearnPage({
                       name="redirectPath"
                       value={redirectPath}
                     />
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="mt-4 h-14 w-full rounded-full px-8 text-base shadow-lg shadow-black/5 transition-transform active:scale-95 sm:w-auto"
-                    >
+                    <Button type="submit" size="lg" className="w-full sm:w-auto">
                       Mark lesson complete
                     </Button>
                   </form>
                 ) : (
-                  <div className="rounded-[1.35rem] border border-primary/20 bg-primary/10 px-5 py-4 text-sm text-foreground">
+                  <div className="rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-sm">
                     This lesson is complete.
                   </div>
                 )}
@@ -277,7 +266,7 @@ export default async function LearnPage({
             {activeItem.contentType === "quiz" &&
             activeContent &&
             "questions" in activeContent ? (
-              <div className="mt-8">
+              <div className="mt-4">
                 <QuizForm
                   quiz={activeContent as LearnQuizContent}
                   moduleItemId={activeItem.id}
@@ -285,8 +274,8 @@ export default async function LearnPage({
                 />
               </div>
             ) : null}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </main>
     </div>
   )

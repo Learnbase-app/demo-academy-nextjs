@@ -5,7 +5,6 @@ import { AuthForm } from "@/components/academy/auth-form"
 import { PublicHeader } from "@/components/academy/public-header"
 import { SiteFooter } from "@/components/academy/site-footer"
 import { DemoCredentials } from "@/components/academy/demo-credentials"
-import { Badge } from "@/components/ui/badge"
 import { getTenant } from "@/lib/learnbase/server"
 
 type LoginPageProps = {
@@ -20,47 +19,29 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
     <div className="min-h-svh bg-background">
       <PublicHeader tenant={tenant} />
 
-      <main className="hero-glow mx-auto grid max-w-6xl gap-16 px-6 py-20 lg:grid-cols-[1fr_28rem] lg:items-start">
-        <section className="max-w-2xl">
-          <p className="section-kicker">Student access</p>
-          <h1 className="font-heading mt-4 text-5xl leading-[0.96] font-semibold sm:text-6xl">
-            Welcome back to Launchcraft.
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Log in to resume the academy-building course, track progress, and
-            access your dashboard.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-2">
-            <Badge
-              variant="outline"
-              className="text-[0.64rem] tracking-[0.22em] uppercase"
-            >
-              Resume progress
-            </Badge>
-            <Badge
-              variant="secondary"
-              className="text-[0.64rem] tracking-[0.22em] uppercase"
-            >
-              Instant dashboard access
-            </Badge>
-          </div>
-
-          <DemoCredentials />
-        </section>
-
-        <section className="atelier-panel relative mt-10 overflow-hidden rounded-[2rem] border border-border/70 bg-background/50 p-6 backdrop-blur-xl sm:p-8 lg:mt-0">
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent" />
-
-          <div className="relative z-10">
-            <h2 className="font-heading text-3xl font-semibold tracking-tight">
-              Log in
-            </h2>
-            <p className="mt-3 text-sm leading-7 text-muted-foreground">
-              Use your student account to continue learning.
+      <main className="mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-24">
+        <div className="grid gap-12 lg:grid-cols-[1fr_24rem] lg:gap-20">
+          <div className="max-w-lg">
+            <h1 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
+              Welcome back.
+            </h1>
+            <p className="mt-3 text-muted-foreground">
+              Log in to resume the course, track progress, and access your
+              dashboard.
             </p>
 
             <div className="mt-8">
+              <DemoCredentials />
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-lg font-semibold tracking-tight">Log in</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Use your student account to continue.
+            </p>
+
+            <div className="mt-6">
               <AuthForm
                 action={loginAction}
                 mode="login"
@@ -68,17 +49,17 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               />
             </div>
 
-            <p className="mt-6 text-center text-sm text-muted-foreground sm:text-left">
+            <p className="mt-6 text-sm text-muted-foreground">
               New here?{" "}
               <Link
                 href={`/signup${next ? `?next=${encodeURIComponent(next)}` : ""}`}
-                className="text-foreground underline underline-offset-4 transition-colors hover:text-foreground/80"
+                className="text-foreground underline underline-offset-4"
               >
                 Create an account
               </Link>
             </p>
           </div>
-        </section>
+        </div>
       </main>
 
       <SiteFooter tenant={tenant} />

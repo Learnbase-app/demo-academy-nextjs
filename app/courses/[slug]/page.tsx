@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import {
   getCourseBySlug,
@@ -98,76 +97,68 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
   return (
     <div className="min-h-svh bg-background">
       <PublicHeader tenant={tenant} />
-      <main className="mx-auto max-w-6xl px-6 py-20">
-        <div className="grid gap-10 lg:grid-cols-[1fr_24rem]">
+
+      <main className="mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-20">
+        <div className="grid gap-10 lg:grid-cols-[1fr_20rem] lg:gap-12">
+          {/* Main Content */}
           <section>
-            <div className="flex flex-wrap gap-2">
-              <Badge
-                variant="outline"
-                className="text-[0.64rem] tracking-[0.22em] uppercase"
-              >
+            <div className="flex flex-wrap gap-1.5">
+              <Badge variant="secondary" className="text-xs">
                 {course.categories[0]?.name ?? "Course"}
               </Badge>
-              <Badge
-                variant="secondary"
-                className="text-[0.64rem] tracking-[0.18em] uppercase"
-              >
+              <Badge variant="outline" className="text-xs">
                 {course.level}
               </Badge>
               {course.tags.slice(0, 2).map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="outline"
-                  className="text-[0.64rem] tracking-[0.18em] uppercase"
-                >
+                <Badge key={tag} variant="outline" className="text-xs">
                   {tag}
                 </Badge>
               ))}
             </div>
 
-            <h1 className="font-heading mt-6 max-w-4xl text-5xl leading-[0.96] font-semibold text-balance sm:text-6xl">
+            <h1 className="font-heading mt-5 text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl">
               {course.title}
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
+            <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
               {course.description}
             </p>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              <div className="rounded-[1.5rem] border border-border/70 bg-background/75 px-4 py-4 text-sm shadow-sm shadow-black/5">
-                <div className="section-kicker">Modules</div>
-                <div className="mt-2 text-2xl font-semibold tracking-tight">
-                  {course.modulesCount}
-                </div>
+            {/* Stats */}
+            <div className="mt-8 flex flex-wrap gap-6 text-sm">
+              <div>
+                <span className="text-xs text-muted-foreground">Modules</span>
+                <p className="text-lg font-semibold">{course.modulesCount}</p>
               </div>
-              <div className="rounded-[1.5rem] border border-border/70 bg-background/75 px-4 py-4 text-sm shadow-sm shadow-black/5">
-                <div className="section-kicker">Lessons</div>
-                <div className="mt-2 text-2xl font-semibold tracking-tight">
-                  {course.itemsCount}
-                </div>
+              <div>
+                <span className="text-xs text-muted-foreground">Lessons</span>
+                <p className="text-lg font-semibold">{course.itemsCount}</p>
               </div>
-              <div className="rounded-[1.5rem] border border-border/70 bg-background/75 px-4 py-4 text-sm shadow-sm shadow-black/5">
-                <div className="section-kicker">Level</div>
-                <div className="mt-2 text-2xl font-semibold capitalize">
+              <div>
+                <span className="text-xs text-muted-foreground">Level</span>
+                <p className="text-lg font-semibold capitalize">
                   {course.level}
-                </div>
+                </p>
               </div>
-              <div className="rounded-[1.5rem] border border-border/70 bg-background/75 px-4 py-4 text-sm shadow-sm shadow-black/5">
-                <div className="section-kicker">Certificate</div>
-                <div className="mt-2 text-2xl font-semibold tracking-tight">
+              <div>
+                <span className="text-xs text-muted-foreground">
+                  Certificate
+                </span>
+                <p className="text-lg font-semibold">
                   {course.includeCertificate ? "Yes" : "No"}
-                </div>
+                </p>
               </div>
             </div>
 
-            <section className="mt-16">
-              <h2 className="font-heading text-3xl font-semibold tracking-tight">
+            {/* Objectives */}
+            <section className="mt-14">
+              <h2 className="font-heading text-xl font-semibold tracking-tight">
                 What you will learn
               </h2>
-              <div className="mt-6 grid gap-3 md:grid-cols-2">
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
                 {course.objectives.map((objective) => (
                   <div
                     key={objective}
-                    className="rounded-[1.45rem] border border-border/65 bg-background/72 px-4 py-4 text-sm leading-7 text-foreground/90"
+                    className="rounded-lg border border-border/40 px-4 py-3 text-sm leading-relaxed text-muted-foreground"
                   >
                     {objective}
                   </div>
@@ -175,12 +166,13 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
               </div>
             </section>
 
-            <section className="mt-16">
-              <h2 className="font-heading text-3xl font-semibold tracking-tight">
+            {/* Curriculum */}
+            <section className="mt-14">
+              <h2 className="font-heading text-xl font-semibold tracking-tight">
                 Curriculum
               </h2>
               <Accordion
-                className="mt-6"
+                className="mt-4"
                 multiple
                 defaultValue={
                   modulesWithItems[0] ? [modulesWithItems[0].id] : []
@@ -190,35 +182,41 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
                   <AccordionItem key={module.id} value={module.id}>
                     <AccordionTrigger>
                       <div>
-                        <div className="section-kicker">Module {index + 1}</div>
-                        <h3 className="mt-2 text-2xl font-semibold tracking-tight">
+                        <p className="text-xs font-medium text-muted-foreground">
+                          Module {index + 1}
+                        </p>
+                        <h3 className="mt-1 text-base font-semibold tracking-tight">
                           {module.title}
                         </h3>
-                        <p className="mt-2 max-w-2xl text-sm leading-7 text-muted-foreground">
-                          {module.description}
-                        </p>
                       </div>
-                      <div className="text-right text-xs text-muted-foreground">
+                      <span className="text-xs text-muted-foreground">
                         {module.itemsCount} lessons
-                      </div>
+                      </span>
                     </AccordionTrigger>
 
-                    <AccordionContent className="border-t border-border/45 pt-4">
+                    <AccordionContent className="border-t border-border/30 pt-3">
                       <div className="space-y-1">
                         {module.items.map((item, itemIndex) => (
                           <div
                             key={item.id}
-                            className="flex items-center justify-between gap-4 rounded-[1.25rem] bg-background/60 px-3 py-3 text-sm"
+                            className="flex items-center justify-between gap-4 rounded-lg px-3 py-2.5 text-sm"
                           >
                             <div className="flex items-center gap-3">
-                              <span className="text-muted-foreground">
+                              <span className="font-mono text-xs text-muted-foreground">
                                 {String(itemIndex + 1).padStart(2, "0")}
                               </span>
                               <span>{item.title}</span>
                             </div>
-                            <div className="flex items-center gap-3 text-xs tracking-[0.18em] text-muted-foreground uppercase">
+                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
                               <span>{item.contentType}</span>
-                              {item.isPreview ? <span>Preview</span> : null}
+                              {item.isPreview ? (
+                                <Badge
+                                  variant="secondary"
+                                  className="text-[0.65rem]"
+                                >
+                                  Preview
+                                </Badge>
+                              ) : null}
                             </div>
                           </div>
                         ))}
@@ -229,17 +227,18 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
               </Accordion>
             </section>
 
-            <section id="faq" className="mt-16">
-              <h2 className="font-heading text-3xl font-semibold tracking-tight">
+            {/* FAQ */}
+            <section className="mt-14">
+              <h2 className="font-heading text-xl font-semibold tracking-tight">
                 FAQ
               </h2>
-              <Accordion className="mt-6">
+              <Accordion className="mt-4">
                 {faqs.map((faq) => (
                   <AccordionItem key={faq.question} value={faq.question}>
-                    <AccordionTrigger className="text-lg font-semibold tracking-tight">
+                    <AccordionTrigger className="font-semibold">
                       <span>{faq.question}</span>
                     </AccordionTrigger>
-                    <AccordionContent className="border-t border-border/40 pt-4 leading-7">
+                    <AccordionContent className="border-t border-border/30 pt-3 leading-relaxed">
                       <p>{faq.answer}</p>
                     </AccordionContent>
                   </AccordionItem>
@@ -248,135 +247,112 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
             </section>
           </section>
 
-          <aside className="lg:sticky lg:top-28 lg:self-start">
-            <Card className="atelier-panel py-0">
-              <CardHeader className="border-b border-border/55 py-6">
-                <div className="section-kicker">Enrollment</div>
-                <CardTitle className="text-5xl">
-                  {formatPrice(course.price, course.currency)}
-                </CardTitle>
-                {originalPrice ? (
-                  <div className="text-sm text-muted-foreground line-through">
-                    {originalPrice}
-                  </div>
-                ) : null}
-              </CardHeader>
-
-              <CardContent className="py-6">
-                <p className="text-sm leading-7 text-muted-foreground">
-                  {course.shortDescription}
+          {/* Sidebar */}
+          <aside className="lg:sticky lg:top-24 lg:self-start">
+            <div className="rounded-xl border border-border/50 bg-card p-5">
+              <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                Enrollment
+              </p>
+              <p className="font-heading mt-2 text-3xl font-semibold tracking-tight">
+                {formatPrice(course.price, course.currency)}
+              </p>
+              {originalPrice ? (
+                <p className="mt-0.5 text-sm text-muted-foreground line-through">
+                  {originalPrice}
                 </p>
+              ) : null}
 
-                <div className="mt-6 space-y-2 text-sm text-foreground/90">
-                  {course.features.map((feature) => (
-                    <div key={feature} className="flex gap-3">
-                      <span className="mt-2 size-2 rounded-full bg-primary" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                {course.shortDescription}
+              </p>
 
-                <div id="pricing" className="mt-8 space-y-3">
-                  <div className="rounded-[1.35rem] border border-border/60 bg-background/72 px-4 py-4 text-sm">
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="text-muted-foreground">
-                        Launch offer
-                      </span>
-                      <span className="font-medium">
-                        {formatPrice(course.price, course.currency)}
-                      </span>
-                    </div>
-                    {originalPrice ? (
-                      <div className="mt-2 flex items-center justify-between gap-3">
-                        <span className="text-muted-foreground">
-                          Regular value
-                        </span>
-                        <span className="text-muted-foreground line-through">
-                          {originalPrice}
-                        </span>
-                      </div>
-                    ) : null}
-                  </div>
+              <Separator className="my-4" />
 
-                  <Button
-                    size="lg"
-                    className="h-12 w-full"
-                    render={
-                      <Link
-                        href={`/signup?next=${encodeURIComponent(checkoutPath)}`}
-                      />
-                    }
-                  >
-                    Create account to enroll
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="h-12 w-full"
-                    render={
-                      <Link
-                        href={`/login?next=${encodeURIComponent(checkoutPath)}`}
-                      />
-                    }
-                  >
-                    I already have an account
-                  </Button>
-                  <form action={checkoutAction}>
-                    <input type="hidden" name="courseId" value={course.id} />
-                    <input
-                      type="hidden"
-                      name="courseSlug"
-                      value={course.slug}
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {course.features.map((feature) => (
+                  <li key={feature} className="flex gap-2">
+                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-foreground/30" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-6 space-y-2">
+                <Button
+                  size="lg"
+                  className="w-full"
+                  render={
+                    <Link
+                      href={`/signup?next=${encodeURIComponent(checkoutPath)}`}
                     />
-                    <Button type="submit" variant="ghost" className="w-full">
-                      Already signed in on this browser? Enroll instantly.
-                    </Button>
-                  </form>
-                </div>
+                  }
+                >
+                  Create account to enroll
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  render={
+                    <Link
+                      href={`/login?next=${encodeURIComponent(checkoutPath)}`}
+                    />
+                  }
+                >
+                  Log in to enroll
+                </Button>
+                <form action={checkoutAction}>
+                  <input type="hidden" name="courseId" value={course.id} />
+                  <input
+                    type="hidden"
+                    name="courseSlug"
+                    value={course.slug}
+                  />
+                  <Button
+                    type="submit"
+                    variant="ghost"
+                    className="w-full text-xs"
+                  >
+                    Already signed in? Enroll instantly.
+                  </Button>
+                </form>
+              </div>
 
-                <Separator className="my-6" />
-
-                <div className="text-sm leading-7 text-muted-foreground">
-                  Course access is immediate. Since this demo course is free,
-                  enrollment takes a single click once you&apos;re signed in.
-                </div>
-              </CardContent>
-            </Card>
+              <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+                Course access is immediate. Since this demo course is free,
+                enrollment takes a single click once you&apos;re signed in.
+              </p>
+            </div>
 
             {course.instructor ? (
-              <Card className="mt-6 py-0">
-                <CardHeader className="border-b border-border/55 py-6">
-                  <div className="section-kicker">Instructor</div>
-                  <CardTitle className="text-3xl">
-                    {course.instructor.name ?? "Launchcraft Team"}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="py-6">
-                  <p className="text-sm leading-7 text-muted-foreground">
-                    {course.instructor.bio ??
-                      course.instructor.title ??
-                      "A focused operator-teacher combining curriculum, positioning, and launch systems."}
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="mt-4 rounded-xl border border-border/50 p-5">
+                <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                  Instructor
+                </p>
+                <p className="font-heading mt-2 text-lg font-semibold tracking-tight">
+                  {course.instructor.name ?? "Launchcraft Team"}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {course.instructor.bio ??
+                    course.instructor.title ??
+                    "A focused operator-teacher combining curriculum, positioning, and launch systems."}
+                </p>
+              </div>
             ) : null}
           </aside>
         </div>
       </main>
+
       {/* Mobile Sticky CTA */}
-      <div className="pb-safe fixed right-0 bottom-0 left-0 z-40 border-t border-border/80 bg-background/90 p-4 shadow-[0_-10px_40px_-5px_rgba(0,0,0,0.1)] backdrop-blur-xl lg:hidden">
+      <div className="fixed right-0 bottom-0 left-0 z-40 border-t border-border/60 bg-background/95 px-5 py-3 backdrop-blur-lg lg:hidden">
         <div className="mx-auto flex items-center justify-between gap-4">
-          <div className="flex flex-col">
-            <span className="text-[0.68rem] tracking-[0.2em] text-muted-foreground uppercase">
-              Launch offer
-            </span>
-            <span className="text-xl font-semibold">
+          <div>
+            <span className="text-xs text-muted-foreground">Price</span>
+            <p className="text-lg font-semibold tracking-tight">
               {formatPrice(course.price, course.currency)}
-            </span>
+            </p>
           </div>
           <Button
             size="lg"
-            className="h-12 w-full max-w-[14rem] rounded-full shadow-lg shadow-black/5 transition-transform active:scale-95"
             render={
               <Link href={`/signup?next=${encodeURIComponent(checkoutPath)}`} />
             }
@@ -385,7 +361,8 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
           </Button>
         </div>
       </div>
-      <div className="h-20 lg:hidden" /> {/* Spacer */}
+      <div className="h-20 lg:hidden" />
+
       <SiteFooter tenant={tenant} />
     </div>
   )

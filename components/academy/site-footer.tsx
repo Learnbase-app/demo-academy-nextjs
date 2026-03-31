@@ -10,7 +10,6 @@ import {
 
 import { Logo } from "@/components/academy/logo"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 import type { Tenant } from "@/lib/learnbase/types"
 
 type SiteFooterProps = {
@@ -52,90 +51,77 @@ export function SiteFooter({ tenant }: SiteFooterProps) {
   ].filter((item) => item.href)
 
   return (
-    <footer className="border-t border-border/50">
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="atelier-panel rounded-[2.2rem] border border-border/70 p-8 md:p-10">
-          <div className="grid gap-10 md:grid-cols-[1.25fr_0.75fr_0.85fr]">
-            <div>
-              <Logo />
-              <p className="mt-5 max-w-md text-sm leading-7 text-muted-foreground">
-                {tenant.footerText ??
-                  "A focused learning business demo powered by LearnBase and a server-first Next.js storefront."}
-              </p>
-              <p className="mt-6 text-[0.7rem] tracking-[0.24em] text-muted-foreground uppercase">
-                Built for creators, operators, and educators
-              </p>
-            </div>
-
-            <div>
-              <h2 className="section-kicker">Explore</h2>
-              <div className="mt-5 space-y-3 text-sm text-muted-foreground">
-                <div>
-                  <Link href="/courses" className="hover:text-foreground">
-                    Courses
-                  </Link>
-                </div>
-                <div>
-                  <Link href="/login" className="hover:text-foreground">
-                    Log in
-                  </Link>
-                </div>
-                <div>
-                  <Link href="/signup" className="hover:text-foreground">
-                    Sign up
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h2 className="section-kicker">Contact</h2>
-              <div className="mt-5 space-y-3 text-sm text-muted-foreground">
-                <div>{tenant.contactEmail ?? "hello@launchcraft.academy"}</div>
-                <div>
-                  Low-friction enrollment, clean storefronts, premium feel.
-                </div>
-              </div>
-
-              {socialLinks.length > 0 ? (
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {socialLinks.map((item) => {
-                    const Icon = item.icon
-
-                    return (
-                      <Button
-                        key={item.key}
-                        variant="outline"
-                        size="icon-sm"
-                        render={
-                          <a
-                            href={item.href!}
-                            target="_blank"
-                            rel="noreferrer"
-                            aria-label={item.label}
-                          />
-                        }
-                      >
-                        <Icon />
-                      </Button>
-                    )
-                  })}
-                </div>
-              ) : null}
-            </div>
-          </div>
-
-          <Separator className="my-8" />
-
-          <div className="flex flex-col gap-3 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-            <p>
-              Launchcraft is intentionally narrow: one offer, one path, one calm
-              learner journey.
-            </p>
-            <p className="text-[0.72rem] tracking-[0.24em] uppercase">
-              LearnBase + Next.js
+    <footer className="border-t border-border/40">
+      <div className="mx-auto max-w-5xl px-5 py-16 sm:px-8">
+        <div className="grid gap-10 sm:grid-cols-[1.5fr_1fr_1fr]">
+          <div>
+            <Logo />
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              {tenant.footerText ??
+                "A focused learning business demo powered by LearnBase and a server-first Next.js storefront."}
             </p>
           </div>
+
+          <div>
+            <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+              Explore
+            </p>
+            <nav className="mt-4 flex flex-col gap-2.5 text-sm text-muted-foreground">
+              <Link href="/courses" className="hover:text-foreground">
+                Courses
+              </Link>
+              <Link href="/login" className="hover:text-foreground">
+                Log in
+              </Link>
+              <Link href="/signup" className="hover:text-foreground">
+                Sign up
+              </Link>
+            </nav>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+              Contact
+            </p>
+            <div className="mt-4 text-sm text-muted-foreground">
+              {tenant.contactEmail ?? "hello@launchcraft.academy"}
+            </div>
+
+            {socialLinks.length > 0 ? (
+              <div className="mt-5 flex gap-1.5">
+                {socialLinks.map((item) => {
+                  const Icon = item.icon
+
+                  return (
+                    <Button
+                      key={item.key}
+                      variant="ghost"
+                      size="icon-sm"
+                      render={
+                        <a
+                          href={item.href!}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={item.label}
+                        />
+                      }
+                    >
+                      <Icon />
+                    </Button>
+                  )
+                })}
+              </div>
+            ) : null}
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-3 border-t border-border/30 pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            One offer, one path, one calm learner journey.
+          </p>
+          <p className="tracking-widest uppercase">
+            LearnBase + Next.js
+          </p>
         </div>
       </div>
     </footer>
