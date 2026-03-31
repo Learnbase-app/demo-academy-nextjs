@@ -4,8 +4,8 @@ import { loginAction } from "@/app/actions"
 import { AuthForm } from "@/components/academy/auth-form"
 import { PublicHeader } from "@/components/academy/public-header"
 import { SiteFooter } from "@/components/academy/site-footer"
+import { DemoCredentials } from "@/components/academy/demo-credentials"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getTenant } from "@/lib/learnbase/server"
 
 type LoginPageProps = {
@@ -46,52 +46,38 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             </Badge>
           </div>
 
-          <Card className="atelier-panel mt-8 py-0">
-            <CardHeader className="border-b border-border/55 py-6">
-              <div className="section-kicker">Demo student account</div>
-              <CardTitle className="text-3xl">
-                Use the seeded credentials to explore the full flow.
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="py-6 text-sm leading-7 text-muted-foreground">
-              <p>
-                Email: <code>demo@launchcraft.academy</code>
-              </p>
-              <p className="mt-3">
-                Password: <code>Launchcraft123!</code>
-              </p>
-              <p className="mt-4">
-                This account is already enrolled in the flagship course.
-              </p>
-            </CardContent>
-          </Card>
+          <DemoCredentials />
         </section>
 
-        <section className="atelier-panel rounded-[2rem] border border-border/70 p-8">
-          <h2 className="font-heading text-3xl font-semibold tracking-tight">
-            Log in
-          </h2>
-          <p className="mt-3 text-sm leading-7 text-muted-foreground">
-            Use your student account to continue learning.
-          </p>
+        <section className="atelier-panel mt-10 lg:mt-0 rounded-[2rem] border border-border/70 p-6 sm:p-8 relative overflow-hidden bg-background/50 backdrop-blur-xl">
+          <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent pointer-events-none" />
+          
+          <div className="relative z-10">
+            <h2 className="font-heading text-3xl font-semibold tracking-tight">
+              Log in
+            </h2>
+            <p className="mt-3 text-sm leading-7 text-muted-foreground">
+              Use your student account to continue learning.
+            </p>
 
-          <div className="mt-8">
-            <AuthForm
-              action={loginAction}
-              mode="login"
-              nextPath={next ?? "/account"}
-            />
+            <div className="mt-8">
+              <AuthForm
+                action={loginAction}
+                mode="login"
+                nextPath={next ?? "/account"}
+              />
+            </div>
+
+            <p className="mt-6 text-sm text-center sm:text-left text-muted-foreground">
+              New here?{" "}
+              <Link
+                href={`/signup${next ? `?next=${encodeURIComponent(next)}` : ""}`}
+                className="text-foreground transition-colors hover:text-foreground/80 underline underline-offset-4"
+              >
+                Create an account
+              </Link>
+            </p>
           </div>
-
-          <p className="mt-6 text-sm text-muted-foreground">
-            New here?{" "}
-            <Link
-              href={`/signup${next ? `?next=${encodeURIComponent(next)}` : ""}`}
-              className="text-foreground underline underline-offset-4"
-            >
-              Create an account
-            </Link>
-          </p>
         </section>
       </main>
 

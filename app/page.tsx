@@ -74,27 +74,27 @@ export default async function HomePage() {
 
       <main>
         <section className="border-b border-border/60">
-          <div className="hero-glow mx-auto grid max-w-6xl gap-12 px-6 py-18 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:py-24">
+          <div className="hero-glow mx-auto grid max-w-6xl gap-12 px-6 py-18 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-28">
             <div className="max-w-3xl">
               <Badge
                 variant="outline"
-                className="text-[0.64rem] tracking-[0.24em] uppercase"
+                className="text-[0.64rem] tracking-[0.24em] uppercase py-1 px-3"
               >
                 {categories[0]?.name ?? "Flagship course"}
               </Badge>
 
-              <h1 className="mt-8 max-w-5xl font-heading text-5xl leading-[0.95] font-semibold text-balance sm:text-6xl lg:text-7xl">
+              <h1 className="mt-8 max-w-5xl font-heading text-5xl leading-[1.05] tracking-tight font-semibold text-balance sm:text-6xl lg:text-[4.5rem]">
                 {heroTitle}
               </h1>
 
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+              <p className="mt-8 max-w-2xl text-lg sm:text-xl leading-relaxed text-muted-foreground">
                 {heroSubtitle}
               </p>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <Button
                   size="lg"
-                  className="h-12 rounded-full px-6"
+                  className="h-12 sm:h-14 rounded-full px-8 text-base shadow-lg shadow-black/5 transition-all hover:scale-105 active:scale-95"
                   render={<Link href="/courses" />}
                 >
                   Explore the catalog
@@ -102,23 +102,23 @@ export default async function HomePage() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="h-12 rounded-full px-6"
+                  className="h-12 sm:h-14 rounded-full px-8 text-base bg-background/50 backdrop-blur-sm transition-all hover:bg-background active:scale-95"
                   render={<Link href="/signup" />}
                 >
                   Create a student account
                 </Button>
               </div>
 
-              <div className="mt-10 grid gap-3 sm:grid-cols-3">
+              <div className="mt-14 grid gap-4 sm:grid-cols-3">
                 {studioMetrics.map((metric) => (
                   <div
                     key={metric.label}
-                    className="rounded-[1.5rem] border border-border/70 bg-background/72 px-4 py-4 shadow-sm shadow-black/5 backdrop-blur-sm"
+                    className="rounded-[1.75rem] border border-border/60 bg-background/50 px-5 py-5 shadow-sm shadow-black/5 backdrop-blur-xl transition-all hover:bg-background/80"
                   >
-                    <div className="text-[0.64rem] tracking-[0.2em] text-muted-foreground uppercase">
+                    <div className="text-[0.64rem] tracking-[0.2em] text-muted-foreground/80 uppercase">
                       {metric.label}
                     </div>
-                    <div className="mt-2 text-2xl font-semibold tracking-tight">
+                    <div className="mt-3 text-3xl font-semibold tracking-tight">
                       {metric.value}
                     </div>
                   </div>
@@ -126,8 +126,8 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <Card className="atelier-panel hairline-grid overflow-hidden py-0">
-              <CardHeader className="border-b border-border/55 py-8">
+            <Card className="atelier-panel hairline-grid overflow-hidden py-0 shadow-2xl shadow-black/5 hover:scale-[1.02] transition-transform duration-500">
+              <CardHeader className="border-b border-border/55 py-8 pb-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="section-kicker">Flagship training</div>

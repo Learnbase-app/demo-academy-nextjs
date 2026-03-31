@@ -365,6 +365,25 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
         </div>
       </main>
 
+      {/* Mobile Sticky CTA */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border/80 bg-background/90 p-4 pb-safe backdrop-blur-xl lg:hidden shadow-[0_-10px_40px_-5px_rgba(0,0,0,0.1)]">
+        <div className="mx-auto flex items-center justify-between gap-4">
+          <div className="flex flex-col">
+            <span className="text-[0.68rem] tracking-[0.2em] text-muted-foreground uppercase">Launch offer</span>
+            <span className="text-xl font-semibold">{formatPrice(course.price, course.currency)}</span>
+          </div>
+          <Button 
+            size="lg" 
+            className="h-12 w-full max-w-[14rem] rounded-full transition-transform active:scale-95 shadow-lg shadow-black/5" 
+            render={<Link href={`/signup?next=${encodeURIComponent(checkoutPath)}`} />}
+          >
+            Enroll now
+          </Button>
+        </div>
+      </div>
+
+      <div className="h-20 lg:hidden" /> {/* Spacer */}
+
       <SiteFooter tenant={tenant} />
     </div>
   )

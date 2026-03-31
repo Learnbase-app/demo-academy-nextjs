@@ -114,7 +114,7 @@ export default async function LearnPage({
     <div className="min-h-svh bg-background">
       <AccountHeader student={student} />
 
-      <main className="mx-auto grid max-w-7xl gap-8 px-6 py-10 lg:grid-cols-[19rem_1fr]">
+      <main className="mx-auto flex flex-col-reverse gap-8 px-4 py-8 sm:px-6 sm:py-10 lg:grid lg:max-w-7xl lg:grid-cols-[20rem_1fr]">
         <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
           <Card className="atelier-panel py-0">
             <CardHeader className="border-b border-border/55 py-6">
@@ -215,7 +215,8 @@ export default async function LearnPage({
 
             {isEmbeddableContent ? (
               <div className="mt-8 space-y-8">
-                <div className="overflow-hidden rounded-[2rem] border border-border/55 bg-background">
+                <div className="overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] border-0 bg-black shadow-2xl ring-1 ring-white/10 relative group">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   {activeContent.embedUrl ? (
                     <iframe
                       src={activeContent.embedUrl}
@@ -231,7 +232,7 @@ export default async function LearnPage({
                   )}
                 </div>
 
-                <div className="rounded-[1.7rem] border border-border/60 bg-background/72 p-6">
+                <div className="rounded-[1.7rem] border border-border/60 bg-background/72 p-6 shadow-sm shadow-black/5">
                   <h3 className="text-lg font-semibold tracking-tight">
                     Lesson summary
                   </h3>
@@ -257,7 +258,7 @@ export default async function LearnPage({
                       name="redirectPath"
                       value={redirectPath}
                     />
-                    <Button type="submit" size="lg" className="h-12">
+                    <Button type="submit" size="lg" className="h-14 mt-4 w-full sm:w-auto rounded-full px-8 text-base shadow-lg shadow-black/5 transition-transform active:scale-95">
                       Mark lesson complete
                     </Button>
                   </form>
