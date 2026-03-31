@@ -77,7 +77,10 @@ function CopyRow({
               exit={{ scale: 0.5, opacity: 0 }}
               transition={{ duration: 0.12 }}
             >
-              <Check className="size-3.5 text-green-600 dark:text-green-400" weight="bold" />
+              <Check
+                className="size-3.5 text-green-600 dark:text-green-400"
+                weight="bold"
+              />
             </motion.div>
           ) : (
             <motion.div

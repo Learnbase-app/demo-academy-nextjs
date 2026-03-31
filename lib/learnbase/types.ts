@@ -19,6 +19,7 @@ export type Tenant = {
     youtube?: string
     facebook?: string
     instagram?: string
+    github?: string
   } | null
   contactEmail: string | null
   landingLayout: {
@@ -152,6 +153,16 @@ export type LearnDocumentContent = {
   embedUrl: string | null
 }
 
+export type LearnVideoContent = {
+  id: string
+  title: string
+  description: string | null
+  url: string | null
+  duration: number | null
+  videoProgress: number
+  transcript: string | null
+}
+
 export type LearnQuizContent = {
   id: string
   title: string
@@ -180,7 +191,7 @@ export type LearnItem = {
   videoProgress: number
   quizBestScore: number | null
   locked: boolean
-  content: LearnDocumentContent | LearnQuizContent | null
+  content: LearnDocumentContent | LearnVideoContent | LearnQuizContent | null
 }
 
 export type LearnModule = {

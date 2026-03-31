@@ -13,9 +13,33 @@ import { formatPrice, getCourseStats } from "@/lib/learnbase/ui"
 
 export const revalidate = 300
 export const metadata = {
-  title: "Launchcraft Academy | Premium digital academy demo",
+  title: "LearnBase Custom Frontend Demo | Next.js Academy",
   description:
-    "Explore a premium academy storefront demo with focused offers, fast enrollment, and a calm learner experience.",
+    "Explore a curated custom frontend example built on the LearnBase API with Next.js and server-first patterns.",
+}
+
+const curatedTexts = {
+  heroTitle: "A curated custom frontend example powered by the LearnBase API.",
+  heroSubtitle:
+    "This landing showcases how to build your own academy UX with Next.js while LearnBase handles courses, auth, checkout, and learner progress.",
+  courseGridTitle: "Curated components, real LearnBase data.",
+  courseGridDescription:
+    "Browse a storefront built as a custom frontend: handcrafted UI, server-rendered routes, and direct LearnBase API integration.",
+  pricingTitle: "Production-ready architecture, free demo access.",
+  pricingDescription:
+    "The goal is to demonstrate the full custom frontend flow on top of LearnBase API, from catalog to checkout and in-course learning.",
+  demoAccessDescription:
+    "Start instantly and experience the complete custom frontend journey.",
+  includedSystemsTitle: "What this custom frontend demonstrates.",
+  includedSystems: [
+    "Custom Next.js storefront",
+    "Server-first LearnBase API fetching",
+    "Secure session and auth flow",
+    "End-to-end learner journey",
+  ],
+  ctaTitle: "Use this as your LearnBase custom frontend starting point.",
+  ctaDescription:
+    "Adapt the UI, keep the backend capabilities, and launch your own academy experience faster.",
 }
 
 export default async function HomePage() {
@@ -26,17 +50,12 @@ export default async function HomePage() {
   ])
 
   const flagshipCourse = courses[0]
-  const heroTitle =
-    tenant.heroTitle ??
-    "Build a premium digital academy with a storefront that feels sharp from day one."
-  const heroSubtitle =
-    tenant.heroSubtitle ??
-    "Launchcraft packages positioning, curriculum, operations, and student experience into a storefront that feels focused instead of bloated."
+  const heroTitle = tenant.heroTitle ?? curatedTexts.heroTitle
+  const heroSubtitle = tenant.heroSubtitle ?? curatedTexts.heroSubtitle
   const courseGridTitle =
-    tenant.landingLayout?.courseGridTitle ?? "Learn the Launchcraft way."
+    tenant.landingLayout?.courseGridTitle ?? curatedTexts.courseGridTitle
   const courseGridDescription =
-    tenant.landingLayout?.courseGridDescription ??
-    "A catalog designed around one narrow promise: move from expertise to a launch-ready academy without dragging students through clutter."
+    tenant.landingLayout?.courseGridDescription ?? curatedTexts.courseGridDescription
   const originalPrice = flagshipCourse.originalPrice
     ? formatPrice(flagshipCourse.originalPrice, flagshipCourse.currency)
     : null
@@ -47,7 +66,7 @@ export default async function HomePage() {
 
       <main>
         {/* Hero */}
-        <section className="mx-auto max-w-5xl px-5 pb-20 pt-16 sm:px-8 sm:pt-24">
+        <section className="mx-auto max-w-5xl px-5 pt-16 pb-20 sm:px-8 sm:pt-24">
           <div className="max-w-3xl">
             <Badge variant="outline" className="text-xs">
               {categories[0]?.name ?? "Flagship course"}
@@ -128,9 +147,7 @@ export default async function HomePage() {
                 <Button
                   size="lg"
                   className="mt-6"
-                  render={
-                    <Link href={`/courses/${flagshipCourse.slug}`} />
-                  }
+                  render={<Link href={`/courses/${flagshipCourse.slug}`} />}
                 >
                   View course <ArrowRight className="size-4" />
                 </Button>
@@ -209,12 +226,10 @@ export default async function HomePage() {
                   Pricing
                 </p>
                 <h2 className="font-heading mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-                  Premium curriculum, free demo enrollment.
+                  {curatedTexts.pricingTitle}
                 </h2>
                 <p className="mt-4 leading-relaxed text-muted-foreground">
-                  In a real academy this would be a paid launch offer. For the
-                  demo, the full flow stays open so you can experience
-                  onboarding, checkout, and learning without friction.
+                  {curatedTexts.pricingDescription}
                 </p>
               </div>
 
@@ -227,7 +242,7 @@ export default async function HomePage() {
                     $0
                   </p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Enroll instantly and explore the full learning flow.
+                    {curatedTexts.demoAccessDescription}
                   </p>
                   <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                     <li>Full course access</li>
@@ -251,13 +266,12 @@ export default async function HomePage() {
                     Included systems
                   </p>
                   <p className="font-heading mt-2 text-lg font-semibold tracking-tight">
-                    Everything to validate the storefront.
+                    {curatedTexts.includedSystemsTitle}
                   </p>
                   <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
-                    <li>Conversion-focused storefront</li>
-                    <li>SSR-first data loading</li>
-                    <li>Secure session handling</li>
-                    <li>Authenticated learning flow</li>
+                    {curatedTexts.includedSystems.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -271,10 +285,10 @@ export default async function HomePage() {
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="max-w-xl">
                 <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
-                  One flagship course, one clean enrollment path.
+                  {curatedTexts.ctaTitle}
                 </h2>
                 <p className="mt-2 text-muted-foreground">
-                  Clarity, trust, and immediate progress from the first visit.
+                  {curatedTexts.ctaDescription}
                 </p>
               </div>
               <Button

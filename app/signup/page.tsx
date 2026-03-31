@@ -33,7 +33,7 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
               <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
                 What happens next
               </p>
-              <p className="mt-2 font-heading text-lg font-semibold tracking-tight">
+              <p className="font-heading mt-2 text-lg font-semibold tracking-tight">
                 Create your account, confirm access, and step straight into the
                 course flow.
               </p>

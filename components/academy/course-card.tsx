@@ -39,7 +39,7 @@ export function CourseCard({ course }: CourseCardProps) {
             </div>
           </div>
 
-          <h3 className="font-heading mt-4 text-xl font-semibold leading-snug tracking-tight">
+          <h3 className="font-heading mt-4 text-xl leading-snug font-semibold tracking-tight">
             {course.title}
           </h3>
           <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">

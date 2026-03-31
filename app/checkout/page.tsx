@@ -112,8 +112,8 @@ export default async function CheckoutPage({
               </p>
 
               <p className="mt-3 rounded-lg border border-border/40 bg-secondary/20 px-3 py-2.5 text-xs leading-relaxed text-muted-foreground">
-                No payment required in this demo. The button below completes
-                the enrollment immediately.
+                No payment required in this demo. The button below completes the
+                enrollment immediately.
               </p>
 
               <form action={checkoutAction} className="mt-5">

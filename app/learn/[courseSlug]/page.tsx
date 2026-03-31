@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 
 import { completeItemAction, submitQuizAction } from "@/app/actions"
 import { AccountHeader } from "@/components/academy/account-header"
+import { VideoPlayer } from "@/components/academy/video-player"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
@@ -107,7 +108,14 @@ export default async function LearnPage({
   const isEmbeddableContent =
     activeContent &&
     "embedUrl" in activeContent &&
-    activeItem.contentType !== "quiz"
+    activeItem.contentType !== "quiz" &&
+    activeItem.contentType !== "video"
+
+  // Get video URL from the API content
+  const videoSrc =
+    activeItem.contentType === "video" && activeContent && "url" in activeContent && activeContent.url
+      ? (activeContent.url as string)
+      : null
 
   return (
     <div className="min-h-svh bg-background">
@@ -209,30 +217,20 @@ export default async function LearnPage({
               </div>
             ) : null}
 
-            {isEmbeddableContent ? (
+            {videoSrc ? (
               <div className="space-y-6">
-                <div className="overflow-hidden rounded-lg bg-black">
-                  {activeContent.embedUrl ? (
-                    <iframe
-                      src={activeContent.embedUrl}
-                      title={activeItem.title}
-                      className="aspect-video w-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  ) : (
-                    <div className="flex aspect-video items-center justify-center text-sm text-muted-foreground">
-                      No embedded content available.
-                    </div>
-                  )}
-                </div>
+                <VideoPlayer src={videoSrc} title={activeItem.title} />
 
-                <div className="rounded-lg border border-border/40 bg-secondary/20 p-4">
-                  <h3 className="text-sm font-semibold">Lesson summary</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {activeContent.description}
-                  </p>
-                </div>
+                {activeContent &&
+                "description" in activeContent &&
+                activeContent.description ? (
+                  <div className="rounded-lg border border-border/40 bg-secondary/20 p-4">
+                    <h3 className="text-sm font-semibold">Lesson summary</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {activeContent.description}
+                    </p>
+                  </div>
+                ) : null}
 
                 {activeItem.status !== "completed" ? (
                   <form action={completeItemAction}>
@@ -251,7 +249,11 @@ export default async function LearnPage({
                       name="redirectPath"
                       value={redirectPath}
                     />
-                    <Button type="submit" size="lg" className="w-full sm:w-auto">
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full sm:w-auto"
+                    >
                       Mark lesson complete
                     </Button>
                   </form>
@@ -260,6 +262,35 @@ export default async function LearnPage({
                     This lesson is complete.
                   </div>
                 )}
+              </div>
+            ) : activeItem.contentType === "video" && !videoSrc ? (
+              <div className="flex aspect-video items-center justify-center rounded-lg bg-secondary/30 text-sm text-muted-foreground">
+                Video not available yet.
+              </div>
+            ) : isEmbeddableContent ? (
+              <div className="space-y-6">
+                <div className="overflow-hidden rounded-lg bg-black">
+                  {activeContent && "embedUrl" in activeContent && activeContent.embedUrl ? (
+                    <iframe
+                      src={activeContent.embedUrl}
+                      title={activeItem.title}
+                      className="aspect-video w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <div className="flex aspect-video items-center justify-center text-sm text-muted-foreground">
+                      No embedded content available.
+                    </div>
+                  )}
+                </div>
+
+                <div className="rounded-lg border border-border/40 bg-secondary/20 p-4">
+                  <h3 className="text-sm font-semibold">Lesson summary</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {activeContent && "embedUrl" in activeContent ? (activeContent as { description?: string | null }).description : null}
+                  </p>
+                </div>
               </div>
             ) : null}
 

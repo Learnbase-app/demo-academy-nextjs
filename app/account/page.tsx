@@ -103,9 +103,7 @@ export default async function AccountPage() {
                 </Button>
                 <Button
                   variant="ghost"
-                  render={
-                    <Link href={`/courses/${enrollment.course.slug}`} />
-                  }
+                  render={<Link href={`/courses/${enrollment.course.slug}`} />}
                 >
                   View course
                 </Button>

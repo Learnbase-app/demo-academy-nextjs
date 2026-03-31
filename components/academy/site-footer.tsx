@@ -116,12 +116,8 @@ export function SiteFooter({ tenant }: SiteFooterProps) {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-border/30 pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            One offer, one path, one calm learner journey.
-          </p>
-          <p className="tracking-widest uppercase">
-            LearnBase + Next.js
-          </p>
+          <p>One offer, one path, one calm learner journey.</p>
+          <p className="tracking-widest uppercase">LearnBase + Next.js</p>
         </div>
       </div>
     </footer>

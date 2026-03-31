@@ -30,9 +30,7 @@ export function AuthForm({ action, mode, nextPath }: AuthFormProps) {
 
       {mode === "signup" ? (
         <label className="block space-y-1.5">
-          <span className="text-sm font-medium text-foreground">
-            Full name
-          </span>
+          <span className="text-sm font-medium text-foreground">Full name</span>
           <Input
             name="name"
             required

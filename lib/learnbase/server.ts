@@ -12,6 +12,7 @@ import type {
   CourseListItem,
   Enrollment,
   LearnCourse,
+  LearnVideoContent,
   PublicModuleItem,
   QuizSubmissionResult,
   Student,
@@ -207,6 +208,26 @@ export async function getLearnCourse(courseId: string) {
     }
 
     throw error
+  }
+}
+
+export async function getModuleItemVideoContent(moduleItemId: string) {
+  const { accessToken } = await getSessionTokens()
+
+  if (!accessToken) {
+    return null
+  }
+
+  try {
+    return await learnbaseFetch<LearnVideoContent>(
+      `/storefront/modules/preview/${moduleItemId}/content`,
+      {
+        accessToken,
+        cacheMode: "no-store",
+      }
+    )
+  } catch {
+    return null
   }
 }
 

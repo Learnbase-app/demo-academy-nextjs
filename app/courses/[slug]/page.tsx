@@ -302,11 +302,7 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
                 </Button>
                 <form action={checkoutAction}>
                   <input type="hidden" name="courseId" value={course.id} />
-                  <input
-                    type="hidden"
-                    name="courseSlug"
-                    value={course.slug}
-                  />
+                  <input type="hidden" name="courseSlug" value={course.slug} />
                   <Button
                     type="submit"
                     variant="ghost"
