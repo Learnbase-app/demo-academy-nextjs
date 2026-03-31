@@ -23,7 +23,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
       <main className="hero-glow mx-auto grid max-w-6xl gap-16 px-6 py-20 lg:grid-cols-[1fr_28rem] lg:items-start">
         <section className="max-w-2xl">
           <p className="section-kicker">Student access</p>
-          <h1 className="mt-4 font-heading text-5xl leading-[0.96] font-semibold sm:text-6xl">
+          <h1 className="font-heading mt-4 text-5xl leading-[0.96] font-semibold sm:text-6xl">
             Welcome back to Launchcraft.
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
@@ -49,9 +49,9 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           <DemoCredentials />
         </section>
 
-        <section className="atelier-panel mt-10 lg:mt-0 rounded-[2rem] border border-border/70 p-6 sm:p-8 relative overflow-hidden bg-background/50 backdrop-blur-xl">
-          <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent pointer-events-none" />
-          
+        <section className="atelier-panel relative mt-10 overflow-hidden rounded-[2rem] border border-border/70 bg-background/50 p-6 backdrop-blur-xl sm:p-8 lg:mt-0">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent" />
+
           <div className="relative z-10">
             <h2 className="font-heading text-3xl font-semibold tracking-tight">
               Log in
@@ -68,11 +68,11 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               />
             </div>
 
-            <p className="mt-6 text-sm text-center sm:text-left text-muted-foreground">
+            <p className="mt-6 text-center text-sm text-muted-foreground sm:text-left">
               New here?{" "}
               <Link
                 href={`/signup${next ? `?next=${encodeURIComponent(next)}` : ""}`}
-                className="text-foreground transition-colors hover:text-foreground/80 underline underline-offset-4"
+                className="text-foreground underline underline-offset-4 transition-colors hover:text-foreground/80"
               >
                 Create an account
               </Link>

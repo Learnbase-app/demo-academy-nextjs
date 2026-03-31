@@ -46,7 +46,7 @@ function ProgressIndicator({
     <ProgressPrimitive.Indicator
       data-slot="progress-indicator"
       className={cn(
-        "h-full rounded-full bg-[linear-gradient(90deg,color-mix(in_oklab,var(--primary)_88%,white_12%),color-mix(in_oklab,var(--foreground)_10%,var(--primary)_90%))] transition-all duration-1000 ease-out data-[state=complete]:shadow-[0_0_12px_var(--primary)] data-[state=complete]:bg-foreground",
+        "h-full rounded-full bg-[linear-gradient(90deg,color-mix(in_oklab,var(--primary)_88%,white_12%),color-mix(in_oklab,var(--foreground)_10%,var(--primary)_90%))] transition-all duration-1000 ease-out data-[state=complete]:bg-foreground data-[state=complete]:shadow-[0_0_12px_var(--primary)]",
         className
       )}
       {...props}

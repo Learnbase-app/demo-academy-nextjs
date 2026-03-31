@@ -30,7 +30,7 @@ export function MobileMenu({ navItems }: MobileMenuProps) {
     <div className="md:hidden">
       <button
         onClick={() => setIsOpen(true)}
-        className="flex h-10 items-center gap-2 rounded-full border border-border/70 bg-background/80 px-4 text-sm font-medium text-foreground shadow-sm shadow-black/5 transition-active active:scale-95"
+        className="transition-active flex h-10 items-center gap-2 rounded-full border border-border/70 bg-background/80 px-4 text-sm font-medium text-foreground shadow-sm shadow-black/5 active:scale-95"
       >
         Menu <List className="size-4 text-muted-foreground" />
       </button>
@@ -58,7 +58,7 @@ export function MobileMenu({ navItems }: MobileMenuProps) {
             >
               <div className="flex h-full flex-col p-6">
                 <div className="flex items-center justify-between pb-6">
-                  <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+                  <span className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
                     Navigation
                   </span>
                   <button
@@ -101,15 +101,19 @@ export function MobileMenu({ navItems }: MobileMenuProps) {
                     <Button
                       variant="outline"
                       size="lg"
-                      className="w-full h-12 rounded-full text-base"
-                      render={<Link href="/login" onClick={() => setIsOpen(false)} />}
+                      className="h-12 w-full rounded-full text-base"
+                      render={
+                        <Link href="/login" onClick={() => setIsOpen(false)} />
+                      }
                     >
                       Log in
                     </Button>
-                    <Button 
-                      size="lg" 
-                      className="w-full h-12 rounded-full text-base"
-                      render={<Link href="/signup" onClick={() => setIsOpen(false)} />}
+                    <Button
+                      size="lg"
+                      className="h-12 w-full rounded-full text-base"
+                      render={
+                        <Link href="/signup" onClick={() => setIsOpen(false)} />
+                      }
                     >
                       Get started
                     </Button>

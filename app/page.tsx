@@ -78,23 +78,23 @@ export default async function HomePage() {
             <div className="max-w-3xl">
               <Badge
                 variant="outline"
-                className="text-[0.64rem] tracking-[0.24em] uppercase py-1 px-3"
+                className="px-3 py-1 text-[0.64rem] tracking-[0.24em] uppercase"
               >
                 {categories[0]?.name ?? "Flagship course"}
               </Badge>
 
-              <h1 className="mt-8 max-w-5xl font-heading text-5xl leading-[1.05] tracking-tight font-semibold text-balance sm:text-6xl lg:text-[4.5rem]">
+              <h1 className="font-heading mt-8 max-w-5xl text-5xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-[4.5rem]">
                 {heroTitle}
               </h1>
 
-              <p className="mt-8 max-w-2xl text-lg sm:text-xl leading-relaxed text-muted-foreground">
+              <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
                 {heroSubtitle}
               </p>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <Button
                   size="lg"
-                  className="h-12 sm:h-14 rounded-full px-8 text-base shadow-lg shadow-black/5 transition-all hover:scale-105 active:scale-95"
+                  className="h-12 rounded-full px-8 text-base shadow-lg shadow-black/5 transition-all hover:scale-105 active:scale-95 sm:h-14"
                   render={<Link href="/courses" />}
                 >
                   Explore the catalog
@@ -102,7 +102,7 @@ export default async function HomePage() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="h-12 sm:h-14 rounded-full px-8 text-base bg-background/50 backdrop-blur-sm transition-all hover:bg-background active:scale-95"
+                  className="h-12 rounded-full bg-background/50 px-8 text-base backdrop-blur-sm transition-all hover:bg-background active:scale-95 sm:h-14"
                   render={<Link href="/signup" />}
                 >
                   Create a student account
@@ -126,7 +126,7 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <Card className="atelier-panel hairline-grid overflow-hidden py-0 shadow-2xl shadow-black/5 hover:scale-[1.02] transition-transform duration-500">
+            <Card className="atelier-panel hairline-grid overflow-hidden py-0 shadow-2xl shadow-black/5 transition-transform duration-500 hover:scale-[1.02]">
               <CardHeader className="border-b border-border/55 py-8 pb-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -206,7 +206,7 @@ export default async function HomePage() {
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
             <div className="max-w-xl">
               <p className="section-kicker">What students get</p>
-              <h2 className="mt-4 font-heading text-4xl leading-tight font-semibold">
+              <h2 className="font-heading mt-4 text-4xl leading-tight font-semibold">
                 A tighter path from expertise to academy.
               </h2>
               <p className="mt-5 text-lg leading-8 text-muted-foreground">
@@ -246,7 +246,7 @@ export default async function HomePage() {
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div className="max-w-2xl">
                 <p className="section-kicker">Course catalog</p>
-                <h2 className="mt-4 font-heading text-4xl leading-tight font-semibold">
+                <h2 className="font-heading mt-4 text-4xl leading-tight font-semibold">
                   {courseGridTitle}
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-muted-foreground">
@@ -287,7 +287,7 @@ export default async function HomePage() {
           <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
             <div>
               <p className="section-kicker">Pricing</p>
-              <h2 className="mt-4 font-heading text-4xl leading-tight font-semibold">
+              <h2 className="font-heading mt-4 text-4xl leading-tight font-semibold">
                 Premium curriculum, free demo enrollment.
               </h2>
               <p className="mt-6 text-lg leading-8 text-muted-foreground">
@@ -350,7 +350,7 @@ export default async function HomePage() {
             <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
                 <p className="section-kicker">Final note</p>
-                <h2 className="mt-4 font-heading text-4xl leading-tight font-semibold">
+                <h2 className="font-heading mt-4 text-4xl leading-tight font-semibold">
                   One flagship course, one clean enrollment path, one calm
                   learner journey.
                 </h2>

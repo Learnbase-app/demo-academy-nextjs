@@ -215,8 +215,8 @@ export default async function LearnPage({
 
             {isEmbeddableContent ? (
               <div className="mt-8 space-y-8">
-                <div className="overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] border-0 bg-black shadow-2xl ring-1 ring-white/10 relative group">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="group relative overflow-hidden rounded-[1.5rem] border-0 bg-black shadow-2xl ring-1 ring-white/10 sm:rounded-[2rem]">
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   {activeContent.embedUrl ? (
                     <iframe
                       src={activeContent.embedUrl}
@@ -258,7 +258,11 @@ export default async function LearnPage({
                       name="redirectPath"
                       value={redirectPath}
                     />
-                    <Button type="submit" size="lg" className="h-14 mt-4 w-full sm:w-auto rounded-full px-8 text-base shadow-lg shadow-black/5 transition-transform active:scale-95">
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="mt-4 h-14 w-full rounded-full px-8 text-base shadow-lg shadow-black/5 transition-transform active:scale-95 sm:w-auto"
+                    >
                       Mark lesson complete
                     </Button>
                   </form>

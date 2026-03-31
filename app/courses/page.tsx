@@ -23,7 +23,7 @@ export default async function CoursesPage() {
           <div className="grid gap-10 lg:grid-cols-[1fr_20rem] lg:items-end">
             <div className="max-w-3xl">
               <p className="section-kicker">Catalog</p>
-              <h1 className="mt-4 font-heading text-5xl leading-[0.96] font-semibold sm:text-6xl">
+              <h1 className="font-heading mt-4 text-5xl leading-[0.96] font-semibold sm:text-6xl">
                 Focused training for building a premium academy.
               </h1>
               <p className="mt-6 text-lg leading-8 text-muted-foreground">
